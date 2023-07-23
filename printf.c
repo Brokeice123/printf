@@ -9,37 +9,45 @@
 
 int _printf(const char *format, ...)
 {
-	int count = 0;
+	int chars_written = 0;
 	va_list args;
-	char c, *s;
 
 	va_start(args, format);
-	for (; *format != '\0'; format++)
+
+	while (*format)
 	{
 		if (*format == '%')
 		{
-			switch (*++format)
-			{
-				case 'c':
-				c = (char) va_arg(args, int);
-				count += char_fmt(c);
-				break;
-				case 's':
-				s = va_arg(args, char *);
-				count += string_fmt(s);
-				break;
-				case '%':
-				count += percent_fmt();
-				break;
-				default:
-				break;
-			}
+			format++;
+				if (*format == '\0')
+					break;
+
+				if (*format == 'c')
+				{
+					char c = (char) va_arg(args, int);
+
+					chars_written += char_fmt(c);
+				}
+				else if (*format == 's')
+				{
+					char *s = va_arg(args, char *);
+
+					chars_written += string_fmt(s);
+				}
+				else if (*format == '%')
+				{
+					chars_written += percent_fmt();
+				}
+			format++;
 		}
 		else
 		{
 			_write(format, 1);
+			chars_written++;
+			format++;
 		}
 	}
+
 	va_end(args);
-	return (count);
+	return (chars_written);
 }
