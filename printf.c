@@ -38,6 +38,7 @@ int _printf(const char *format, ...)
 		else
 		{
 			_write(format, 1);
+			count++;
 		}
 	}
 	va_end(args);
