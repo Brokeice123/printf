@@ -73,3 +73,37 @@ int print_int(va_list args)
 	free(buffer);
 	return (length);
 }
+
+/**
+ * print_binary - Prints the binary form of the number passed
+ * @args: the va_list that contains the binary number to be printed
+ * Return: The number of characters printed
+ */
+
+int print_binary(va_list args)
+{
+	unsigned int num = va_arg(args, unsigned int);
+	int bits = sizeof(num) * 8;
+	int i, length = 0, leading_zeros = 1;
+	char bit;
+
+	if (num == 0)
+	{
+		write(1, "0", 1);
+		return (1);
+	}
+
+	for (i = bits - 1; i >= 0; i--)
+	{
+		bit = (num & (1u << i)) ? '1' : '0';
+
+		if (bit == '1')
+			leading_zeros = 0;
+		if (!leading_zeros)
+		{
+			write(1, &bit, 1);
+			length++;
+		}
+	}
+	return (length);
+}

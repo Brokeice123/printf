@@ -12,5 +12,6 @@ int print_percent(__attribute__((unused))va_list arg);
 int print_int(va_list arg);
 int num_length(int num);
 int _abs(int num);
+int print_binary(va_list arg);
 
 #endif
