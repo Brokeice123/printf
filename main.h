@@ -13,5 +13,9 @@ int print_int(va_list arg);
 int num_length(int num);
 int _abs(int num);
 int print_binary(va_list arg);
+int print_decimal(va_list args);
+int print_octal(va_list args);
+int print_hex(va_list args);
+int print_hex_upper(va_list args);
 
 #endif
