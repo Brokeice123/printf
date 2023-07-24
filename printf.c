@@ -36,6 +36,23 @@ int _putchar(char c)
 /* } */
 
 /**
+ *_strlen - Returns the length of a string
+ *@s: The string being used
+ *Return: Returns the length of the string
+ */
+
+int _strlen(char *s)
+{
+	unsigned int len = 0;
+	int i;
+
+	for (i = 0; *(s + i) != '\0'; i++)
+		len += sizeof(char);
+
+	return (len);
+}
+
+/**
  *_printf -  produces output according to a format
  *@format: a character string
  *
@@ -60,7 +77,7 @@ int _printf(const char *format, ...)
 				break;
 				case 's':
 				s = va_arg(args, char *);
-				count += write(1, s, strlen(s));
+				count += write(1, s, _strlen(s));
 				break;
 				case '%':
 				count += write(1, "%", 1);
