@@ -15,31 +15,33 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	va_start(args, format);
-	for (; *format != '\0'; format++)
+
+	while (format && *format)
 	{
 		if (*format == '%')
 		{
-			switch (*++format)
+			format++;
+
+			if (*format == '\0')
+				break;
+			else if (*format == '%')
+				count += write(1, format, 1);
+			else if (*format == 'c')
+				count += print_char(args);
+			else if (*format == 's')
+				count += print_string(args);
+
+			else
 			{
-				case 'c':
-					count += print_char(args);
-					break;
-
-				case 's':
-					count += print_string(args);
-					break;
-
-				case '%':
-					count += print_percent(args);
-					break;
-
+				count += write(1, "%", 1);
+				count += write(1, format, 1);
 			}
 		}
 		else
-		{
-		count += write(1, format, 1);
-		}
+			count += write(1, format, 1);
+		format++;
 	}
+
 	va_end(args);
 	return (count);
 }
