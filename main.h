@@ -3,10 +3,11 @@
 
 #include <stdarg.h>
 #include <unistd.h>
-#include <stddef.h>
 #include <stdlib.h>
 
 int _printf(const char *format, ...);
-
+int print_char(va_list arg);
+int print_string(va_list arg);
+int print_percent(__attribute__((unused))va_list arg);
 
 #endif
