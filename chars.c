@@ -48,3 +48,35 @@ int print_percent(__attribute__((unused))va_list arg)
 {
 	return (write(1, "%", 1));
 }
+
+/**
+ *print_string_custom - Prints a string with a specified format
+ *@args: Arguments to print
+ *Return: Number of args printed
+ */
+
+int print_string_custom(va_list args)
+{
+	char *c = va_arg(args, char *);
+	int i;
+	char j;
+
+
+	for (i = 0; c[i] != '\0'; i++)
+	{
+
+		j = c[i];
+
+		if (j < 32 || j >= 127)
+		{
+			write(1, "\\x", 2);
+			write(1, &j, 1);
+		}
+
+		else
+			write(1, &j, 1);
+	}
+
+	return (0);
+
+}

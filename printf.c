@@ -41,6 +41,8 @@ int _printf(const char *format, ...)
 				count += print_hex(args);
 			else if (*format == 'X')
 				count += print_hex_upper(args);
+			else if (*format == 'S')
+				count += print_string_custom(args);
 			else
 			{
 				count += write(1, "%", 1);
